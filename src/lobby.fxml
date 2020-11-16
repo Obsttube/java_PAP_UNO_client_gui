@@ -44,6 +44,6 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <ListView layoutX="110.0" layoutY="328.0" prefHeight="282.0" prefWidth="990.0" />
+      <ListView layoutX="110.0" layoutY="328.0" prefHeight="282.0" prefWidth="990.0" fx:id="lobbyList"/>
    </children>
 </Pane>
