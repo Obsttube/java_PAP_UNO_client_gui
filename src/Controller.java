@@ -40,4 +40,22 @@ public class Controller {
         System.out.println("Registered.");
     }
 
+    @FXML
+    private void handleConnect(ActionEvent event) {
+        event.consume();
+        System.out.println("Connecting...");
+    }
+
+    @FXML
+    private void handleRefresh(ActionEvent event) {
+        event.consume();
+        System.out.println("Refreshing...");
+    }
+
+    @FXML
+    private void handleCreateGame(ActionEvent event) {
+        event.consume();
+        System.out.println("Creating game...");
+    }
+
 }
