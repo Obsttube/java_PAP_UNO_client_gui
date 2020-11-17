@@ -31,7 +31,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("UNO");
-        primaryStage.setScene(new Scene(root, 1200, 800));
+        primaryStage.setScene(new Scene(root));
 
         primaryStage.show();
     }

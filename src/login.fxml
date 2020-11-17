@@ -9,39 +9,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
-        <TextField layoutX="491.0" layoutY="273.0" prefHeight="44.0" prefWidth="301.0">
+        <TextField layoutX="934.0" layoutY="451.0" prefHeight="44.0" prefWidth="301.0">
             <font>
                 <Font size="20.0" />
             </font>
         </TextField>
-        <Text layoutX="285.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login:">
+        <Text layoutX="728.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login:">
             <font>
                 <Font size="30.0" />
             </font>
         </Text>
-        <Text layoutX="259.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+        <Text layoutX="702.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
             <font>
                 <Font size="30.0" />
             </font>
         </Text>
-        <Button layoutX="377.0" layoutY="615.0" mnemonicParsing="false" onAction="#handleLogin" text="Login">
+        <Button layoutX="748.0" layoutY="815.0" mnemonicParsing="false" onAction="#handleLogin" text="Login">
             <font>
                 <Font size="30.0" />
             </font>
         </Button>
-        <Button layoutX="683.0" layoutY="615.0" mnemonicParsing="false" onAction="#handleRegister" text="Register">
+        <Button layoutX="1054.0" layoutY="815.0" mnemonicParsing="false" onAction="#handleRegister" text="Register">
             <font>
                 <Font size="30.0" />
             </font>
         </Button>
-        <ImageView fitHeight="183.0" fitWidth="268.0" layoutX="470.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="300.0" fitWidth="411.0" layoutX="770.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../../../data/logo.png" />
             </image>
         </ImageView>
-      <PasswordField layoutX="491.0" layoutY="428.0" prefHeight="44.0" prefWidth="301.0">
+      <PasswordField layoutX="934.0" layoutY="606.0" prefHeight="44.0" prefWidth="301.0">
          <font>
             <Font size="20.0" />
          </font>

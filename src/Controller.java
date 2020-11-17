@@ -19,7 +19,7 @@ public class Controller {
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("UNO");
-            stage.setScene(new Scene(root, 1200, 800));
+            stage.setScene(new Scene(root));
 
             Scene scene = stage.getScene();
             ListView list = (ListView) scene.lookup("#lobbyList");
