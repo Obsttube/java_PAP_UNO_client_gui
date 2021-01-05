@@ -9,8 +9,7 @@ import javafx.scene.image.ImageView;
 
 public class playerViewController {
 
-    @FXML
-    private Button play0;
+
 
     @FXML
     private Button play1;
@@ -102,13 +101,14 @@ public class playerViewController {
         for (int i=4; i<id.length(); i++) idNumber = idNumber + id.charAt(i);
         if (idNumber.equals("13") ) System.out.println(-1); //todo player.playcard if index < player.numberofcards
         else System.out.println(idNumber);
-        setTopCard("uno_assets_2d/PNGs/large/YELLOW_THREE.png");
+        setTopCard("YELLOW_THREE");//todo top card from server
         renderPlayerCards();
 
 
     }
 
     public void setTopCard(String url) {
+        url = "uno_assets_2d/PNGs/large/" + url +".png";
         topCard.setImage(new Image(url));
     }
 
@@ -116,7 +116,7 @@ public class playerViewController {
         ImageView[] cardsList = {card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
                 card11, card12};
         int i=0;
-        String[] playerCards = {"BLUE_THREE", "BLACK_WILD", "YELLOW_REVERSE", "RED_ZERO", "RED_ADD_TWO"};
+        String[] playerCards = {"BLUE_THREE", "BLACK_WILD", "YELLOW_REVERSE", "RED_ZERO", "RED_ADD_TWO"};//todo playre cards from server
         for (ImageView image : cardsList) {
             if (i<playerCards.length && i<13) {
                 image.setImage(new Image("uno_assets_2d/PNGs/large/" + playerCards[i] +".png"));
