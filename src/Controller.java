@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 public class Controller {
     @FXML TextField textFieldLogin;
     @FXML TextField textFieldPassword;
+    @FXML Text textError;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -26,13 +28,18 @@ public class Controller {
             password = new String(textFieldPassword.getText());
         }
         else{
+            textError.setVisible(true);
             return;
         }
 
         // successfulLogin = serverLogin(login, password);
 
         if(!successfulLogin) {
+            textError.setVisible(true);
             return;
+        }
+        else{
+            textError.setVisible(false);
         }
 
 
