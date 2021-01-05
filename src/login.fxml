@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
-        <TextField layoutX="934.0" layoutY="451.0" prefHeight="44.0" prefWidth="301.0">
+        <TextField fx:id="login" layoutX="934.0" layoutY="451.0" prefHeight="44.0" prefWidth="301.0">
             <font>
                 <Font size="20.0" />
             </font>
@@ -41,7 +41,7 @@
                 <Image url="@../../../../../data/logo.png" />
             </image>
         </ImageView>
-      <PasswordField layoutX="934.0" layoutY="606.0" prefHeight="44.0" prefWidth="301.0">
+      <PasswordField fx:id="password" layoutX="934.0" layoutY="606.0" prefHeight="44.0" prefWidth="301.0">
          <font>
             <Font size="20.0" />
          </font>
