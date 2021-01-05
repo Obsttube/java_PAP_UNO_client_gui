@@ -63,5 +63,13 @@
             <Glow />
          </effect>
       </Text>
+      <Text fx:id="textSuccessfulRegister" fill="#00ee1c" layoutX="823.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="registered successfully" visible="false">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Text>
     </children>
 </Pane>
