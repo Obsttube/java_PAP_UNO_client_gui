@@ -47,7 +47,15 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Text fx:id="textError" fill="RED" layoutX="785.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wrong login or password" visible="false">
+      <Text fx:id="textErrorLogin" fill="RED" layoutX="785.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wrong login or password" visible="false">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Text>
+      <Text fx:id="textErrorRegister" fill="RED" layoutX="823.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="unable to register" visible="false">
          <font>
             <Font size="35.0" />
          </font>
