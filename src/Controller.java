@@ -3,16 +3,38 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class Controller {
+    @FXML TextField textFieldLogin;
+    @FXML TextField textFieldPassword;
 
     @FXML
     private void handleLogin(ActionEvent event) {
         event.consume();
         System.out.println("Logging in...");
+
+        boolean successfulLogin = true;
+        String login;
+        String password;
+        if(textFieldLogin.getText() != null && !textFieldLogin.getText().isEmpty() &&
+                textFieldPassword.getText() != null && !textFieldPassword.getText().isEmpty()) {
+            login = new String(textFieldLogin.getText());
+            password = new String(textFieldPassword.getText());
+        }
+        else{
+            return;
+        }
+
+        // successfulLogin = serverLogin(login, password);
+
+        if(!successfulLogin) {
+            return;
+        }
+
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
