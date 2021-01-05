@@ -12,7 +12,9 @@ import javafx.stage.Stage;
 public class Controller {
     @FXML TextField textFieldLogin;
     @FXML TextField textFieldPassword;
-    @FXML Text textError;
+    @FXML Text textErrorLogin;
+    @FXML Text textErrorRegister;
+    @FXML Text textSuccessfulRegister;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -28,18 +30,22 @@ public class Controller {
             password = new String(textFieldPassword.getText());
         }
         else{
-            textError.setVisible(true);
+            textErrorLogin.setVisible(true);
+            textErrorRegister.setVisible(false);
+            textSuccessfulRegister.setVisible(false);
             return;
         }
 
         // successfulLogin = serverLogin(login, password);
 
         if(!successfulLogin) {
-            textError.setVisible(true);
+            textErrorLogin.setVisible(true);
+            textErrorRegister.setVisible(false);
+            textSuccessfulRegister.setVisible(false);
             return;
         }
         else{
-            textError.setVisible(false);
+            textErrorLogin.setVisible(false);
         }
 
 
@@ -66,7 +72,35 @@ public class Controller {
     @FXML
     private void handleRegister(ActionEvent event) {
         event.consume();
-        System.out.println("Registered.");
+
+        boolean successfulRegister = true;
+        String login;
+        String password;
+        if(textFieldLogin.getText() != null && !textFieldLogin.getText().isEmpty() &&
+                textFieldPassword.getText() != null && !textFieldPassword.getText().isEmpty()) {
+            login = new String(textFieldLogin.getText());
+            password = new String(textFieldPassword.getText());
+        }
+        else{
+            textErrorRegister.setVisible(true);
+            textSuccessfulRegister.setVisible(false);
+            textErrorLogin.setVisible(false);
+            return;
+        }
+
+        // successfulRegister = serverRegister(login, password);
+
+        if(!successfulRegister) {
+            textErrorRegister.setVisible(true);
+            textSuccessfulRegister.setVisible(false);
+            textErrorLogin.setVisible(false);
+            return;
+        }
+        else{
+            textSuccessfulRegister.setVisible(true);
+            textErrorRegister.setVisible(false);
+            textErrorLogin.setVisible(false);
+        }
     }
 
     @FXML
