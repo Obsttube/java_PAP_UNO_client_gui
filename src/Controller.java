@@ -107,6 +107,7 @@ public class Controller {
         
                     stage.show();
                     Main.stg.close();
+                    Main.stg = stage;
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -185,6 +186,22 @@ public class Controller {
             clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
             clientRequest.lobbyId = "1";
             objectOutputStream.writeObject(clientRequest);
+
+            // TODO będzie to inaczej zrealizowane, ale na razie zrobię tak, aby połączyć obie części
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("playerView.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setTitle("UNO");
+                stage.setScene(new Scene(root));
+    
+                stage.show();
+                Main.stg.close();
+                Main.stg = stage;
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
 
         } catch (UnknownHostException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
