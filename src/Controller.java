@@ -5,9 +5,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Controller {
     @FXML TextField textFieldLogin;
@@ -15,6 +28,14 @@ public class Controller {
     @FXML Text textErrorLogin;
     @FXML Text textErrorRegister;
     @FXML Text textSuccessfulRegister;
+
+    static Socket socket = null;
+    static BufferedInputStream bufferedInputStream;
+    static OutputStream outputStream;
+    static ObjectInputStream objectInputStream;
+    static ObjectOutputStream objectOutputStream;
+    static ClientRequest clientRequest;
+    static ServerRequest serverRequest;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -36,36 +57,81 @@ public class Controller {
             return;
         }
 
-        // successfulLogin = serverLogin(login, password);
+        try{
+            socket = new Socket("127.0.0.1", 25566);
+            socket.setSoTimeout(10*1000);
+            
+            Thread.sleep(100); // TODO
+
+            bufferedInputStream = new BufferedInputStream(socket.getInputStream());
+            outputStream = socket.getOutputStream();
+            objectOutputStream = new ObjectOutputStream(outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
+
+            clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
+            clientRequest.playerName = login;
+            objectOutputStream.writeObject(clientRequest);
+
+            objectInputStream = new ObjectInputStream(bufferedInputStream);
+            serverRequest = (ServerRequest)objectInputStream.readObject();
+            System.out.println(serverRequest.requestType); // LOGIN_SUCCESSFUL
+            if (serverRequest.requestType == ServerRequest.RequestType.LOGIN_UNSUCCESSFUL)
+                successfulLogin = false;
+
+            if (successfulLogin){
+                clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
+                objectOutputStream.writeObject(clientRequest);
+
+                serverRequest = (ServerRequest)objectInputStream.readObject();
+                System.out.println(serverRequest.requestType); // LOBBY_LIST
+                List<Lobby> lobbyList = serverRequest.lobbyList;
+
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setTitle("UNO");
+                    stage.setScene(new Scene(root));
+        
+                    Scene scene = stage.getScene();
+                    ListView list = (ListView) scene.lookup("#lobbyList");
+                    for (Lobby lobby : lobbyList) {
+                        System.out.println(lobby.id + " " + lobby.name);
+                        list.getItems().add(lobby.name);
+                    }
+        
+                    stage.show();
+                    Main.stg.close();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        } catch (UnknownHostException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } catch (IOException e) {
+            // TODO
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } catch (InterruptedException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } catch (ClassNotFoundException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } finally {
+            /*if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    Logger.getLogger(class.getName()).log(Level.SEVERE, e.getMessage(), e);
+                }
+            }*/
+        }
 
         if(!successfulLogin) {
             textErrorLogin.setVisible(true);
             textErrorRegister.setVisible(false);
             textSuccessfulRegister.setVisible(false);
-            return;
-        }
-        else{
+        }else{
             textErrorLogin.setVisible(false);
-        }
-
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("UNO");
-            stage.setScene(new Scene(root));
-
-            Scene scene = stage.getScene();
-            ListView list = (ListView) scene.lookup("#lobbyList");
-            list.getItems().add("Lobby 1");
-            list.getItems().add("Lobby 2");
-            list.getItems().add("Lobby 2");
-
-            stage.show();
-            Main.stg.close();
-        } catch(Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -107,18 +173,33 @@ public class Controller {
     private void handleConnect(ActionEvent event) {
         event.consume();
         System.out.println("Connecting...");
+        // TODO Mateusz pobierz id wybranego lobby i ustal jego ID
+        try{
+            
+            clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
+            clientRequest.lobbyId = "1";
+            objectOutputStream.writeObject(clientRequest);
+
+        } catch (UnknownHostException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } catch (IOException e) {
+            // TODO
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     @FXML
     private void handleRefresh(ActionEvent event) {
         event.consume();
         System.out.println("Refreshing...");
+        // jeszcze nie zaimplementowane po stronie serwera
     }
 
     @FXML
     private void handleCreateGame(ActionEvent event) {
         event.consume();
         System.out.println("Creating game...");
+        // jeszcze nie zaimplementowane po stronie serwera
     }
 
 }
