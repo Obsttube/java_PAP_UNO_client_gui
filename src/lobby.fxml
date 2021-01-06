@@ -34,7 +34,7 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <TextField layoutX="770.0" layoutY="318.0" prefHeight="65.0" prefWidth="376.0">
+      <TextField fx:id="textFieldGameName" layoutX="770.0" layoutY="318.0" prefHeight="65.0" prefWidth="376.0">
          <font>
             <Font size="30.0" />
          </font>

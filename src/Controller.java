@@ -14,6 +14,7 @@ import javafx.scene.Node;
 public class Controller {
     @FXML TextField textFieldLogin;
     @FXML TextField textFieldPassword;
+    @FXML TextField textFieldGameName;
     @FXML Text textErrorLogin;
     @FXML Text textErrorRegister;
     @FXML Text textSuccessfulRegister;
