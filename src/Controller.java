@@ -30,6 +30,7 @@ public class Controller {
     @FXML Text textErrorRegister;
     @FXML Text textSuccessfulRegister;
     @FXML Text textWrongGameName;
+    @FXML Text textSelectLobby;
 
     static List<Lobby> lobbyList = null;
 
@@ -181,8 +182,11 @@ public class Controller {
         int selectedItem = list.getSelectionModel().getSelectedIndex();
         if (selectedItem == -1){
             System.out.println("Please select the lobby");
-            // TODO Mateusz ogarnij wyświetlanie jakiejś wiadomości, że nie wybrano lobby
+            textSelectLobby.setVisible(true);
             return;
+        }
+        else{
+            textSelectLobby.setVisible(false);
         }
         System.out.println(selectedItem);
         try{
