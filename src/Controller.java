@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class Controller {
     @FXML TextField textFieldLogin;
@@ -57,11 +59,16 @@ public class Controller {
             stage.setScene(new Scene(root));
 
             Scene scene = stage.getScene();
-            ListView list = (ListView) scene.lookup("#lobbyList");
-            list.getItems().add("Lobby 1");
-            list.getItems().add("Lobby 2");
-            list.getItems().add("Lobby 2");
+            ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
+            ArrayList<String> lobbyList = new ArrayList<String>();
 
+            // lobbyList = serverGetLobbyList();
+
+            list.getItems().clear();
+            for(String lobby : lobbyList){
+                list.getItems().add(lobby);
+            }
+            list.getItems().add("test lobby");
             stage.show();
             Main.stg.close();
         } catch(Exception e) {
@@ -113,6 +120,18 @@ public class Controller {
     private void handleRefresh(ActionEvent event) {
         event.consume();
         System.out.println("Refreshing...");
+
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
+        ArrayList<String> lobbyList = new ArrayList<String>();
+
+        // lobbyList = serverGetLobbyList();
+
+        list.getItems().clear();
+        for(String lobby : lobbyList){
+            list.getItems().add(lobby);
+        }
     }
 
     @FXML
