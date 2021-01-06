@@ -18,6 +18,7 @@ public class Controller {
     @FXML Text textErrorLogin;
     @FXML Text textErrorRegister;
     @FXML Text textSuccessfulRegister;
+    @FXML Text textWrongGameName;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -39,7 +40,7 @@ public class Controller {
             return;
         }
 
-        // successfulLogin = serverLogin(login, password);
+        // successfulLogin = login(login, password);
 
         if(!successfulLogin) {
             textErrorLogin.setVisible(true);
@@ -63,7 +64,7 @@ public class Controller {
             ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
             ArrayList<String> lobbyList = new ArrayList<String>();
 
-            // lobbyList = serverGetLobbyList();
+            // lobbyList = getLobbyList();
 
             list.getItems().clear();
             for(String lobby : lobbyList){
@@ -96,7 +97,7 @@ public class Controller {
             return;
         }
 
-        // successfulRegister = serverRegister(login, password);
+        // successfulRegister = register(login, password);
 
         if(!successfulRegister) {
             textErrorRegister.setVisible(true);
@@ -127,7 +128,7 @@ public class Controller {
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
         ArrayList<String> lobbyList = new ArrayList<String>();
 
-        // lobbyList = serverGetLobbyList();
+        // lobbyList = getLobbyList();
 
         list.getItems().clear();
         for(String lobby : lobbyList){
@@ -139,6 +140,19 @@ public class Controller {
     private void handleCreateGame(ActionEvent event) {
         event.consume();
         System.out.println("Creating game...");
+
+        String name;
+        if(textFieldGameName.getText() != null && !textFieldGameName.getText().isEmpty()) {
+            name = new String(textFieldGameName.getText());
+            textWrongGameName.setVisible(false);
+        }
+        else{
+            textWrongGameName.setVisible(true);
+            return;
+        }
+
+        // createLobby(name);
+        // TODO load game scrren
     }
 
 }
