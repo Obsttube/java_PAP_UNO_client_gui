@@ -214,13 +214,24 @@ public class Controller {
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
-        ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 
-        // lobbyList = getLobbyList();
+        try{
+            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
+            Main.objectOutputStream.writeObject(Main.clientRequest);
 
-        list.getItems().clear();
-        for(Lobby lobby : lobbyList){
-            list.getItems().add(lobby.name);
+            Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+            System.out.println(Main.serverRequest.requestType); // LOBBY_LIST
+            List<Lobby> lobbyList = Main.serverRequest.lobbyList;
+
+            list.getItems().clear();
+            for (Lobby lobby : lobbyList) {
+                System.out.println(lobby.id + " " + lobby.name);
+                list.getItems().add(lobby.name);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
 
