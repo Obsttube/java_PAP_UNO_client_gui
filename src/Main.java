@@ -19,11 +19,8 @@ public class Main extends Application {
 
     static Socket socket = null;
     static BufferedInputStream bufferedInputStream;
-    static OutputStream outputStream;
     static ObjectInputStream objectInputStream;
     static ObjectOutputStream objectOutputStream;
-    static ClientRequest clientRequest;
-    static ServerRequest serverRequest;
 
     @Override
     public void start(Stage primaryStage){

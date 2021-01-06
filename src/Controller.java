@@ -12,6 +12,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +52,9 @@ public class Controller {
             return;
         }
 
+        ClientRequest clientRequest;
+        ServerRequest serverRequest;
+
         try{
             Main.socket = new Socket("127.0.0.1", 25566);
             Main.socket.setSoTimeout(10*1000);
@@ -58,26 +62,26 @@ public class Controller {
             Thread.sleep(100); // TODO
 
             Main.bufferedInputStream = new BufferedInputStream(Main.socket.getInputStream());
-            Main.outputStream = Main.socket.getOutputStream();
-            Main.objectOutputStream = new ObjectOutputStream(Main.outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
+            OutputStream outputStream = Main.socket.getOutputStream();
+            Main.objectOutputStream = new ObjectOutputStream(outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
 
-            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
-            Main.clientRequest.playerName = login;
-            Main.objectOutputStream.writeObject(Main.clientRequest);
+            clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
+            clientRequest.playerName = login;
+            Main.objectOutputStream.writeObject(clientRequest);
 
             Main.objectInputStream = new ObjectInputStream(Main.bufferedInputStream);
-            Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
-            System.out.println(Main.serverRequest.requestType); // LOGIN_SUCCESSFUL
-            if (Main.serverRequest.requestType == ServerRequest.RequestType.LOGIN_UNSUCCESSFUL)
+            serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+            System.out.println(serverRequest.requestType); // LOGIN_SUCCESSFUL
+            if (serverRequest.requestType == ServerRequest.RequestType.LOGIN_UNSUCCESSFUL)
                 successfulLogin = false;
 
             if (successfulLogin){
-                Main.clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
-                Main.objectOutputStream.writeObject(Main.clientRequest);
+                clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
+                Main.objectOutputStream.writeObject(clientRequest);
 
-                Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
-                System.out.println(Main.serverRequest.requestType); // LOBBY_LIST
-                List<Lobby> lobbyList = Main.serverRequest.lobbyList;
+                serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+                System.out.println(serverRequest.requestType); // LOBBY_LIST
+                List<Lobby> lobbyList = serverRequest.lobbyList;
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
@@ -173,9 +177,9 @@ public class Controller {
         // TODO Mateusz pobierz id wybranego lobby i ustal jego ID
         try{
             
-            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
-            Main.clientRequest.lobbyId = "1";
-            Main.objectOutputStream.writeObject(Main.clientRequest);
+            ClientRequest clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
+            clientRequest.lobbyId = "1";
+            Main.objectOutputStream.writeObject(clientRequest);
 
             // TODO będzie to inaczej zrealizowane, ale na razie zrobię tak, aby połączyć obie części
 
@@ -205,23 +209,16 @@ public class Controller {
         }
     }
 
-    @FXML
-    private void handleRefresh(ActionEvent event) {
-        event.consume();
-        System.out.println("Refreshing...");
-        // jeszcze nie zaimplementowane po stronie serwera
-
-        Node node = (Node) event.getSource();
-        Scene scene = node.getScene();
+    private void refreshItems(Scene scene){
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
 
         try{
-            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
-            Main.objectOutputStream.writeObject(Main.clientRequest);
+            ClientRequest clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
+            Main.objectOutputStream.writeObject(clientRequest);
 
-            Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
-            System.out.println(Main.serverRequest.requestType); // LOBBY_LIST
-            List<Lobby> lobbyList = Main.serverRequest.lobbyList;
+            ServerRequest serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+            System.out.println(serverRequest.requestType); // LOBBY_LIST
+            List<Lobby> lobbyList = serverRequest.lobbyList;
 
             list.getItems().clear();
             for (Lobby lobby : lobbyList) {
@@ -233,6 +230,19 @@ public class Controller {
         } catch (ClassNotFoundException e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleRefresh(ActionEvent event) {
+        event.consume();
+        System.out.println("Refreshing...");
+        // jeszcze nie zaimplementowane po stronie serwera
+
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        
+        refreshItems(scene);
+
     }
 
     @FXML
@@ -260,8 +270,18 @@ public class Controller {
             }
         }
 
-        // createLobby(name);
-        // TODO load game scrren
+        try{
+            ClientRequest clientRequest = new ClientRequest(ClientRequest.RequestType.CREATE_LOBBY);
+            clientRequest.lobbyName = name;
+            Main.objectOutputStream.writeObject(clientRequest);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        Scene scene = Main.stg.getScene();
+
+        refreshItems(scene);
+
     }
 
 }

@@ -119,20 +119,22 @@ public class PlayerViewController {
         //todo player.playcard if index < player.numberofcards
         System.out.println(idNumber);
 
+        ClientRequest clientRequest;
+
         if (SocketThread.gameStarted){
             int selectedCard = Integer.parseInt(idNumber);
-            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
-            Main.clientRequest.choosenCardIndex = selectedCard;
+            clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
+            clientRequest.choosenCardIndex = selectedCard;
             try{
-                Main.objectOutputStream.writeObject(Main.clientRequest);
+                Main.objectOutputStream.writeObject(clientRequest);
             } catch (IOException e){
                 e.printStackTrace();
             }
         } else{
             SocketThread.gameStarted = true;
-            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.CLICK_START);
+            clientRequest = new ClientRequest(ClientRequest.RequestType.CLICK_START);
             try{
-                Main.objectOutputStream.writeObject(Main.clientRequest);
+                Main.objectOutputStream.writeObject(clientRequest);
             } catch(IOException e){
                 e.printStackTrace();
             }
