@@ -108,7 +108,7 @@ public class playerViewController {
     }
 
     public void setTopCard(String url) {
-        url = "uno_assets_2d/PNGs/large/" + url +".png";
+        url = "PNGs/large/" + url +".png";
         topCard.setImage(new Image(url));
     }
 
@@ -119,9 +119,9 @@ public class playerViewController {
         String[] playerCards = {"BLUE_THREE", "BLACK_WILD", "YELLOW_REVERSE", "RED_ZERO", "RED_ADD_TWO"};//todo playre cards from server
         for (ImageView image : cardsList) {
             if (i<playerCards.length && i<13) {
-                image.setImage(new Image("uno_assets_2d/PNGs/large/" + playerCards[i] +".png"));
+                image.setImage(new Image("PNGs/large/" + playerCards[i] +".png"));
             }
-            else image.setImage(new Image("uno_assets_2d/PNGs/large/card_back.png"));
+            else image.setImage(new Image("PNGs/large/card_back.png"));
             i++;
         }
     }
