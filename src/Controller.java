@@ -220,13 +220,13 @@ public class Controller {
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
-        ArrayList<String> lobbyList = new ArrayList<String>();
+        ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 
         // lobbyList = getLobbyList();
 
         list.getItems().clear();
-        for(String lobby : lobbyList){
-            list.getItems().add(lobby);
+        for(Lobby lobby : lobbyList){
+            list.getItems().add(lobby.name);
         }
     }
 
