@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Button layoutX="670.0" layoutY="913.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect">
+      <Button layoutX="670.0" layoutY="948.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect">
          <font>
             <Font size="30.0" />
          </font>
@@ -20,7 +20,7 @@
             <Font size="96.0" />
          </font>
       </Text>
-      <Button layoutX="1068.0" layoutY="911.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh">
+      <Button layoutX="1068.0" layoutY="946.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh">
          <font>
             <Font size="30.0" />
          </font>
@@ -47,6 +47,14 @@
       </Text>
       <ListView fx:id="lobbyList" layoutX="320.0" layoutY="504.0" prefHeight="368.0" prefWidth="1280.0" />
       <Text fx:id="textWrongGameName" fill="RED" layoutX="1207.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wrong game name" visible="false">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Text>
+      <Text fx:id="textSelectLobby" fill="RED" layoutX="773.0" layoutY="923.0" strokeType="OUTSIDE" strokeWidth="0.0" text="select lobby to connect" visible="false">
          <font>
             <Font size="35.0" />
          </font>
