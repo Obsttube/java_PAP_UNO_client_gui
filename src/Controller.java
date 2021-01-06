@@ -31,6 +31,7 @@ public class Controller {
     @FXML Text textSuccessfulRegister;
     @FXML Text textWrongGameName;
 
+    static List<Lobby> lobbyList = null;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -81,7 +82,7 @@ public class Controller {
 
                 serverRequest = (ServerRequest)Main.objectInputStream.readObject();
                 System.out.println(serverRequest.requestType); // LOBBY_LIST
-                List<Lobby> lobbyList = serverRequest.lobbyList;
+                lobbyList = serverRequest.lobbyList;
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
@@ -174,14 +175,21 @@ public class Controller {
     private void handleConnect(ActionEvent event) {
         event.consume();
         System.out.println("Connecting...");
-        // TODO Mateusz pobierz id wybranego lobby i ustal jego ID
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
+        int selectedItem = list.getSelectionModel().getSelectedIndex();
+        if (selectedItem == -1){
+            System.out.println("Please select the lobby");
+            // TODO Mateusz ogarnij wyświetlanie jakiejś wiadomości, że nie wybrano lobby
+            return;
+        }
+        System.out.println(selectedItem);
         try{
             
             ClientRequest clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
-            clientRequest.lobbyId = "1";
+            clientRequest.lobbyId = lobbyList.get(selectedItem).id;
             Main.objectOutputStream.writeObject(clientRequest);
-
-            // TODO będzie to inaczej zrealizowane, ale na razie zrobię tak, aby połączyć obie części
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("playerView.fxml"));
@@ -218,7 +226,7 @@ public class Controller {
 
             ServerRequest serverRequest = (ServerRequest)Main.objectInputStream.readObject();
             System.out.println(serverRequest.requestType); // LOBBY_LIST
-            List<Lobby> lobbyList = serverRequest.lobbyList;
+            lobbyList = serverRequest.lobbyList;
 
             list.getItems().clear();
             for (Lobby lobby : lobbyList) {
