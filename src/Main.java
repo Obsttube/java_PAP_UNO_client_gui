@@ -4,11 +4,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 
 
 public class Main extends Application {
 
     static Stage stg;
+
+    static PlayerViewController playerViewController = null;
+
+    static Socket socket = null;
+    static BufferedInputStream bufferedInputStream;
+    static OutputStream outputStream;
+    static ObjectInputStream objectInputStream;
+    static ObjectOutputStream objectOutputStream;
+    static ClientRequest clientRequest;
+    static ServerRequest serverRequest;
 
     @Override
     public void start(Stage primaryStage){

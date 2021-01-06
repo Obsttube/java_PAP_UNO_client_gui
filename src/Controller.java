@@ -9,12 +9,9 @@ import javafx.scene.text.Text;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,13 +30,6 @@ public class Controller {
     @FXML Text textSuccessfulRegister;
     @FXML Text textWrongGameName;
 
-    static Socket socket = null;
-    static BufferedInputStream bufferedInputStream;
-    static OutputStream outputStream;
-    static ObjectInputStream objectInputStream;
-    static ObjectOutputStream objectOutputStream;
-    static ClientRequest clientRequest;
-    static ServerRequest serverRequest;
 
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -62,32 +52,32 @@ public class Controller {
         }
 
         try{
-            socket = new Socket("127.0.0.1", 25566);
-            socket.setSoTimeout(10*1000);
+            Main.socket = new Socket("127.0.0.1", 25566);
+            Main.socket.setSoTimeout(10*1000);
             
             Thread.sleep(100); // TODO
 
-            bufferedInputStream = new BufferedInputStream(socket.getInputStream());
-            outputStream = socket.getOutputStream();
-            objectOutputStream = new ObjectOutputStream(outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
+            Main.bufferedInputStream = new BufferedInputStream(Main.socket.getInputStream());
+            Main.outputStream = Main.socket.getOutputStream();
+            Main.objectOutputStream = new ObjectOutputStream(Main.outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
 
-            clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
-            clientRequest.playerName = login;
-            objectOutputStream.writeObject(clientRequest);
+            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
+            Main.clientRequest.playerName = login;
+            Main.objectOutputStream.writeObject(Main.clientRequest);
 
-            objectInputStream = new ObjectInputStream(bufferedInputStream);
-            serverRequest = (ServerRequest)objectInputStream.readObject();
-            System.out.println(serverRequest.requestType); // LOGIN_SUCCESSFUL
-            if (serverRequest.requestType == ServerRequest.RequestType.LOGIN_UNSUCCESSFUL)
+            Main.objectInputStream = new ObjectInputStream(Main.bufferedInputStream);
+            Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+            System.out.println(Main.serverRequest.requestType); // LOGIN_SUCCESSFUL
+            if (Main.serverRequest.requestType == ServerRequest.RequestType.LOGIN_UNSUCCESSFUL)
                 successfulLogin = false;
 
             if (successfulLogin){
-                clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
-                objectOutputStream.writeObject(clientRequest);
+                Main.clientRequest = new ClientRequest(ClientRequest.RequestType.GET_LOBBY_LIST);
+                Main.objectOutputStream.writeObject(Main.clientRequest);
 
-                serverRequest = (ServerRequest)objectInputStream.readObject();
-                System.out.println(serverRequest.requestType); // LOBBY_LIST
-                List<Lobby> lobbyList = serverRequest.lobbyList;
+                Main.serverRequest = (ServerRequest)Main.objectInputStream.readObject();
+                System.out.println(Main.serverRequest.requestType); // LOBBY_LIST
+                List<Lobby> lobbyList = Main.serverRequest.lobbyList;
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobby.fxml"));
@@ -183,15 +173,16 @@ public class Controller {
         // TODO Mateusz pobierz id wybranego lobby i ustal jego ID
         try{
             
-            clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
-            clientRequest.lobbyId = "1";
-            objectOutputStream.writeObject(clientRequest);
+            Main.clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
+            Main.clientRequest.lobbyId = "1";
+            Main.objectOutputStream.writeObject(Main.clientRequest);
 
             // TODO będzie to inaczej zrealizowane, ale na razie zrobię tak, aby połączyć obie części
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("playerView.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
+                Main.playerViewController = (PlayerViewController) fxmlLoader.getController();
                 Stage stage = new Stage();
                 stage.setTitle("UNO");
                 stage.setScene(new Scene(root));
@@ -202,6 +193,9 @@ public class Controller {
             } catch(Exception e) {
                 e.printStackTrace();
             }
+
+            SocketThread socketThread = new SocketThread();
+            socketThread.start();
 
         } catch (UnknownHostException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
