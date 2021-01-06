@@ -246,6 +246,15 @@ public class Controller {
             return;
         }
 
+        ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
+        // lobbyList = getLobbyList();
+        for(Lobby lobby : lobbyList){
+            if(name.equals(lobby.name)){
+                textWrongGameName.setVisible(true);
+                return;
+            }
+        }
+
         // createLobby(name);
         // TODO load game scrren
     }
