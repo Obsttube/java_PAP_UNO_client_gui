@@ -214,13 +214,13 @@ public class Controller {
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
-        ArrayList<String> lobbyList = new ArrayList<String>();
+        ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 
         // lobbyList = getLobbyList();
 
         list.getItems().clear();
-        for(String lobby : lobbyList){
-            list.getItems().add(lobby);
+        for(Lobby lobby : lobbyList){
+            list.getItems().add(lobby.name);
         }
     }
 
@@ -238,6 +238,15 @@ public class Controller {
         else{
             textWrongGameName.setVisible(true);
             return;
+        }
+
+        ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
+        // lobbyList = getLobbyList();
+        for(Lobby lobby : lobbyList){
+            if(name.equals(lobby.name)){
+                textWrongGameName.setVisible(true);
+                return;
+            }
         }
 
         // createLobby(name);
