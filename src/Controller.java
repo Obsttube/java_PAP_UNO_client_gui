@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,13 +22,16 @@ import java.util.logging.Logger;
 
 import java.net.Socket;
 import java.net.UnknownHostException;
+import javafx.scene.Node;
 
 public class Controller {
     @FXML TextField textFieldLogin;
     @FXML TextField textFieldPassword;
+    @FXML TextField textFieldGameName;
     @FXML Text textErrorLogin;
     @FXML Text textErrorRegister;
     @FXML Text textSuccessfulRegister;
+    @FXML Text textWrongGameName;
 
     static Socket socket = null;
     static BufferedInputStream bufferedInputStream;
@@ -93,7 +97,9 @@ public class Controller {
                     stage.setScene(new Scene(root));
         
                     Scene scene = stage.getScene();
-                    ListView list = (ListView) scene.lookup("#lobbyList");
+                    ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
+
+                    list.getItems().clear();
                     for (Lobby lobby : lobbyList) {
                         System.out.println(lobby.id + " " + lobby.name);
                         list.getItems().add(lobby.name);
@@ -154,7 +160,7 @@ public class Controller {
             return;
         }
 
-        // successfulRegister = serverRegister(login, password);
+        // successfulRegister = register(login, password);
 
         if(!successfulRegister) {
             textErrorRegister.setVisible(true);
@@ -193,6 +199,18 @@ public class Controller {
         event.consume();
         System.out.println("Refreshing...");
         // jeszcze nie zaimplementowane po stronie serwera
+
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
+        ArrayList<String> lobbyList = new ArrayList<String>();
+
+        // lobbyList = getLobbyList();
+
+        list.getItems().clear();
+        for(String lobby : lobbyList){
+            list.getItems().add(lobby);
+        }
     }
 
     @FXML
@@ -200,6 +218,19 @@ public class Controller {
         event.consume();
         System.out.println("Creating game...");
         // jeszcze nie zaimplementowane po stronie serwera
+
+        String name;
+        if(textFieldGameName.getText() != null && !textFieldGameName.getText().isEmpty()) {
+            name = new String(textFieldGameName.getText());
+            textWrongGameName.setVisible(false);
+        }
+        else{
+            textWrongGameName.setVisible(true);
+            return;
+        }
+
+        // createLobby(name);
+        // TODO load game scrren
     }
 
 }

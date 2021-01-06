@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -34,7 +35,7 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <TextField layoutX="770.0" layoutY="318.0" prefHeight="65.0" prefWidth="376.0">
+      <TextField fx:id="textFieldGameName" layoutX="770.0" layoutY="318.0" prefHeight="65.0" prefWidth="376.0">
          <font>
             <Font size="30.0" />
          </font>
@@ -45,5 +46,13 @@
          </font>
       </Text>
       <ListView fx:id="lobbyList" layoutX="320.0" layoutY="504.0" prefHeight="368.0" prefWidth="1280.0" />
+      <Text fx:id="textWrongGameName" fill="RED" layoutX="1207.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wrong game name" visible="false">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Text>
    </children>
 </Pane>
