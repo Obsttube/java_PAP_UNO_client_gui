@@ -1,103 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerViewController">
-   <children>
-      <GridPane layoutX="73.0" layoutY="706.0" prefHeight="340.0" prefWidth="1774.0">
+
+<BorderPane prefHeight="727.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChooseCard">
+   <center>
+      <GridPane alignment="CENTER" prefHeight="103.0" prefWidth="153.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.0" minWidth="10.0" prefWidth="201.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="0.0" prefWidth="400.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="278.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="play0" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play1" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play2" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play3" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play4" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play5" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play6" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play7" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play8" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play9" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play10" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play11" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="play12" mnemonicParsing="false" onAction="#playCard" prefHeight="50.0" prefWidth="75.0" text="PLAY" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card0" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card1" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card2" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card3" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card4" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card5" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card6" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card7" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card8" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card9" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card10" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card11" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ImageView fx:id="card12" fitHeight="250.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-         </children>
-      </GridPane>
-      <GridPane layoutX="1382.0" layoutY="52.0" prefHeight="496.0" prefWidth="316.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="398.0" minHeight="10.0" prefHeight="398.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button fx:id="play13" mnemonicParsing="false" onAction="#playCard" prefHeight="97.0" prefWidth="546.0" text="DRAW CARD" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="398.0" fitWidth="568.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="BLUE" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@uno_assets_2d/PNGs/large/card_back_alt.png" />
+                  <Image url="@uno_assets_2d/PNGs/large/BLUE_ZERO.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="RED" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <image>
+                  <Image url="@uno_assets_2d/PNGs/large/RED_ZERO.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="YELLOW" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@uno_assets_2d/PNGs/large/YELLOW_ZERO.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="GREEN" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+               <image>
+                  <Image url="@uno_assets_2d/PNGs/large/GREEN_ZERO.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
-      <GridPane layoutX="231.0" layoutY="52.0" prefHeight="496.0" prefWidth="316.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="398.0" minHeight="10.0" prefHeight="398.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOP CARD" textAlignment="CENTER" wrappingWidth="317.712890625" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Text>
-            <ImageView fx:id="topCard" fitHeight="398.0" fitWidth="568.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-         </children>
-      </GridPane>
-   </children>
-</Pane>
+   </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CHOOSE COLOR" textAlignment="CENTER" wrappingWidth="375.0" BorderPane.alignment="TOP_CENTER">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Text>
+   </top>
+</BorderPane>
