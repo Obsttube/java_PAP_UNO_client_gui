@@ -49,13 +49,13 @@ public class PlayerViewController {
     private Button play10;
 
     @FXML
-    private Button play11;
-
-    @FXML
-    private Button play12;
-
-    @FXML
     private Button play13;
+
+    @FXML
+    private Button forward;
+
+    @FXML
+    private Button backward;
 
     @FXML
     private ImageView topCard;
@@ -93,12 +93,6 @@ public class PlayerViewController {
     @FXML
     private ImageView card10;
 
-    @FXML
-    private ImageView card11;
-
-    @FXML
-    private ImageView card12;
-
 
     //static String[] playerCards = {"BLUE_THREE", "BLACK_WILD", "YELLOW_REVERSE", "RED_ZERO", "RED_ADD_TWO"};//todo player cards from server
 
@@ -134,6 +128,8 @@ public class PlayerViewController {
             }
         }
 
+        // TODO deactivate cards
+
         renderPlayerCards();
     }
 
@@ -142,16 +138,12 @@ public class PlayerViewController {
             topCard.setImage(new Image("PNGs/large/card_back.png"));
             return;
         }
-        Card.Color color = card.color;
-        if (SocketThread.currentWildColor != null && (card.type == Card.Type.WILD || card.type == Card.Type.WILD_DRAW_FOUR))
-            color = SocketThread.currentWildColor;
-        String url = "PNGs/large/" + color + "_" + card.type +".png";
+        String url = "PNGs/large/" + card.color + "_" + card.type +".png";
         topCard.setImage(new Image(url));
     }
 
     public void setButtonsState(boolean enabled){
-        Button[] buttonsList = {play0, play1, play2, play3, play4, play5, play6, play7, play8, play9, play10,
-            play11, play12};
+        Button[] buttonsList = {play0, play1, play2, play3, play4, play5, play6, play7, play8, play9, play10};
         if (enabled){
             int i = 0;
             List<Card> playerCards = SocketThread.playerCards;
@@ -172,16 +164,14 @@ public class PlayerViewController {
     }
 
     public void renderPlayerCards () {
-        ImageView[] cardsList = {card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
-            card11, card12};
+        ImageView[] cardsList = {card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,};
         int i=0;
         
         List<Card> playerCards = SocketThread.playerCards;
 
         for (ImageView image : cardsList) {
-            if (playerCards != null && i<playerCards.size() && i<13) {
-                Card currentCard = playerCards.get(i);
-                image.setImage(new Image("PNGs/large/" + currentCard.color + "_" + currentCard.type + ".png"));
+            if (playerCards != null && i<playerCards.size() && i<10) {
+                image.setImage(new Image("PNGs/large/" + playerCards.get(i).color + "_" + playerCards.get(i).type + ".png"));
             }else
                 image.setImage(new Image("PNGs/large/card_back.png"));
             i++;
