@@ -24,22 +24,22 @@
          <children>
             <ImageView fx:id="BLUE" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@uno_assets_2d/PNGs/large/BLUE_ZERO.png" />
+                  <Image url="@PNGs/large/BLUE_ZERO.png" />
                </image>
             </ImageView>
             <ImageView fx:id="RED" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@uno_assets_2d/PNGs/large/RED_ZERO.png" />
+                  <Image url="@PNGs/large/RED_ZERO.png" />
                </image>
             </ImageView>
             <ImageView fx:id="YELLOW" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <image>
-                  <Image url="@uno_assets_2d/PNGs/large/YELLOW_ZERO.png" />
+                  <Image url="@PNGs/large/YELLOW_ZERO.png" />
                </image>
             </ImageView>
             <ImageView fx:id="GREEN" fitHeight="270.0" fitWidth="350.0" onMouseClicked="#chooseCard" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@uno_assets_2d/PNGs/large/GREEN_ZERO.png" />
+                  <Image url="@PNGs/large/GREEN_ZERO.png" />
                </image>
             </ImageView>
          </children>

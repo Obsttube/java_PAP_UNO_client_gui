@@ -6,6 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 
@@ -184,6 +188,20 @@ public class PlayerViewController {
         Card tableCard = SocketThread.tableCard;
         setTopCard(tableCard);//todo top card from server
 
+    }
+
+    public void chooseCard(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chooseCard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("UNO");
+            stage.setScene(new Scene(root));
+            Scene scene = stage.getScene();
+            stage.show();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

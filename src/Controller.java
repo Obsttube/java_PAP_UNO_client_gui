@@ -90,6 +90,7 @@ public class Controller {
                     Parent root = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setTitle("UNO");
+                    stage.setMaximized(true);
                     stage.setScene(new Scene(root));
         
                     Scene scene = stage.getScene();
@@ -205,7 +206,7 @@ public class Controller {
                 Stage stage = new Stage();
                 stage.setTitle("UNO");
                 stage.setScene(new Scene(root));
-    
+                //stage.setMaximized(true);
                 stage.show();
                 Main.stg.close();
                 Main.stg = stage;
