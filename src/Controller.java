@@ -93,6 +93,8 @@ public class Controller {
                     stage.setScene(new Scene(root));
         
                     Scene scene = stage.getScene();
+
+                    @SuppressWarnings("unchecked")
                     ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
 
                     list.getItems().clear();
@@ -178,6 +180,7 @@ public class Controller {
         System.out.println("Connecting...");
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
+        @SuppressWarnings("unchecked")
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
         int selectedItem = list.getSelectionModel().getSelectedIndex();
         if (selectedItem == -1){
@@ -222,6 +225,7 @@ public class Controller {
     }
 
     private void refreshItems(Scene scene){
+        @SuppressWarnings("unchecked")
         ListView<String> list = (ListView<String>) scene.lookup("#lobbyList");
 
         try{
