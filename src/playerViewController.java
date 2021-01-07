@@ -1,21 +1,11 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
-import java.io.InputStreamReader;
-
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 

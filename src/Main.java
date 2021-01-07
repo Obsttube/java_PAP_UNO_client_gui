@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 
@@ -24,7 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        this.stg = primaryStage;
+        stg = primaryStage;
 
         try{
             Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
