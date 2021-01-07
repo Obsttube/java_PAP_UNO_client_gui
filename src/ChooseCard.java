@@ -1,6 +1,7 @@
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -17,6 +18,14 @@ public class ChooseCard {
 
     @FXML
     private ImageView GREEN;
+
+    public void setImages(){
+        Card card = SocketThread.lastSelectedCard;
+        BLUE.setImage(new Image("PNGs/large/BLUE_" + card.type +".png"));
+        RED.setImage(new Image("PNGs/large/RED_" + card.type +".png"));
+        YELLOW.setImage(new Image("PNGs/large/YELLOW_" + card.type +".png"));
+        GREEN.setImage(new Image("PNGs/large/GREEN_" + card.type +".png"));
+    }
 
     public void chooseCard(MouseEvent actionevent) {
         final Node source = (Node) actionevent.getSource();

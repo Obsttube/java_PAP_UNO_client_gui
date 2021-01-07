@@ -49,7 +49,7 @@ public class PlayerViewController {
     private Button play10;
 
     @FXML
-    private Button playCard;
+    private Button drawCard;
 
     @FXML
     private Button forward;
@@ -99,20 +99,17 @@ public class PlayerViewController {
     public void playCard(ActionEvent actionevent) { //returns string representing index of card or -1 if draw has been chosen
         final Node source = (Node) actionevent.getSource();
         String id = source.getId();
-        String idNumber = "";
-        for (int i=4; i<id.length(); i++)
-            idNumber = idNumber + id.charAt(i);
-        if (idNumber.equals("13") )
-            idNumber = "-1";
-        //todo player.playcard if index < player.numberofcards
-        System.out.println(idNumber);
+        //TODO player.drawCard if index < player.numberofcards (??)
 
         ClientRequest clientRequest;
 
         if (SocketThread.gameStarted){
-            int selectedCard = Integer.parseInt(idNumber);
+            int selectedCard = -1;
+            if (id != "drawCard")
+                selectedCard = Integer.parseInt(id.substring(4));
             clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
             clientRequest.choosenCardIndex = selectedCard;
+            SocketThread.lastSelectedCard = SocketThread.playerCards.get(selectedCard);
             try{
                 Main.objectOutputStream.writeObject(clientRequest);
             } catch (IOException e){
@@ -155,12 +152,12 @@ public class PlayerViewController {
                     button.setDisable(true);
                 i++;
             }
-            playCard.setDisable(false);
+            drawCard.setDisable(false);
         }else{
             for (Button button : buttonsList){
                 button.setDisable(true);
             }
-            playCard.setDisable(true);
+            drawCard.setDisable(true);
         }
     }
 
@@ -180,7 +177,7 @@ public class PlayerViewController {
         }
 
         Card tableCard = SocketThread.tableCard;
-        setTopCard(tableCard);//todo top card from server
+        setTopCard(tableCard);
 
     }
 
@@ -191,7 +188,7 @@ public class PlayerViewController {
             Stage stage = new Stage();
             stage.setTitle("UNO");
             stage.setScene(new Scene(root));
-            Scene scene = stage.getScene();
+            ((ChooseCard) fxmlLoader.getController()).setImages();
             stage.show();
         } catch (IOException e){
             e.printStackTrace();

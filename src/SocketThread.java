@@ -10,6 +10,7 @@ public class SocketThread extends Thread {
     static Card tableCard = null; 
     static boolean gameStarted = false;
     static Card.Color currentWildColor = null;
+    static Card lastSelectedCard = null;
 
     public void run(){
         gameStarted = false;

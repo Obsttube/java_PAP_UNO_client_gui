@@ -93,7 +93,7 @@
             <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="playCard" mnemonicParsing="false" onAction="#playCard" prefHeight="97.0" prefWidth="546.0" text="DRAW CARD" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+            <Button fx:id="drawCard" mnemonicParsing="false" onAction="#playCard" prefHeight="97.0" prefWidth="546.0" text="DRAW CARD" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <font>
                   <Font size="44.0" />
                </font>
