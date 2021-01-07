@@ -49,7 +49,7 @@ public class PlayerViewController {
     private Button play10;
 
     @FXML
-    private Button play13;
+    private Button playCard;
 
     @FXML
     private Button forward;
@@ -128,8 +128,6 @@ public class PlayerViewController {
             }
         }
 
-        // TODO deactivate cards
-
         renderPlayerCards();
     }
 
@@ -138,7 +136,10 @@ public class PlayerViewController {
             topCard.setImage(new Image("PNGs/large/card_back.png"));
             return;
         }
-        String url = "PNGs/large/" + card.color + "_" + card.type +".png";
+        Card.Color color = card.color;
+        if (SocketThread.currentWildColor != null && (card.type == Card.Type.WILD || card.type == Card.Type.WILD_DRAW_FOUR))
+            color = SocketThread.currentWildColor;
+        String url = "PNGs/large/" + color + "_" + card.type +".png";
         topCard.setImage(new Image(url));
     }
 
@@ -154,12 +155,12 @@ public class PlayerViewController {
                     button.setDisable(true);
                 i++;
             }
-            play13.setDisable(false);
+            playCard.setDisable(false);
         }else{
             for (Button button : buttonsList){
                 button.setDisable(true);
             }
-            play13.setDisable(true);
+            playCard.setDisable(true);
         }
     }
 
@@ -170,8 +171,9 @@ public class PlayerViewController {
         List<Card> playerCards = SocketThread.playerCards;
 
         for (ImageView image : cardsList) {
-            if (playerCards != null && i<playerCards.size() && i<10) {
-                image.setImage(new Image("PNGs/large/" + playerCards.get(i).color + "_" + playerCards.get(i).type + ".png"));
+            if (playerCards != null && i<playerCards.size() && i<13) {
+                Card currentCard = playerCards.get(i);
+                image.setImage(new Image("PNGs/large/" + currentCard.color + "_" + currentCard.type + ".png"));
             }else
                 image.setImage(new Image("PNGs/large/card_back.png"));
             i++;
