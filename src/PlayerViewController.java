@@ -105,7 +105,7 @@ public class PlayerViewController {
 
         if (SocketThread.gameStarted){
             int selectedCard = -1;
-            if (id != "drawCard")
+            if (id.equals("drawCard"))
                 selectedCard = Integer.parseInt(id.substring(4));
             clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
             clientRequest.choosenCardIndex = selectedCard;
