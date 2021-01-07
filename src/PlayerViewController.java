@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -93,8 +94,13 @@ public class PlayerViewController {
     @FXML
     private ImageView card10;
 
+    @FXML
+    private Text invalidMove;
 
-    //static String[] playerCards = {"BLUE_THREE", "BLACK_WILD", "YELLOW_REVERSE", "RED_ZERO", "RED_ADD_TWO"};//todo player cards from server
+
+    public void invalidMove(boolean show){
+        invalidMove.setVisible(show);
+    }
 
     public void playCard(ActionEvent actionevent) { //returns string representing index of card or -1 if draw has been chosen
         final Node source = (Node) actionevent.getSource();
@@ -105,7 +111,7 @@ public class PlayerViewController {
 
         if (SocketThread.gameStarted){
             int selectedCard = -1;
-            if (id.equals("drawCard"))
+            if (!id.equals("drawCard"))
                 selectedCard = Integer.parseInt(id.substring(4));
             clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
             clientRequest.choosenCardIndex = selectedCard;
@@ -125,6 +131,7 @@ public class PlayerViewController {
             }
         }
 
+        invalidMove(false);
         renderPlayerCards();
     }
 

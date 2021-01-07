@@ -39,10 +39,11 @@ public class SocketThread extends Thread {
                             break;
                         }
                         case ILLEGAL_MOVE:
-                            System.out.println("Illegal move! (It wasn't accepted)");
                             pvc = Main.playerViewController;
-                            if (pvc !=null)
+                            if (pvc !=null){
                                 pvc.setButtonsState(true);
+                                pvc.invalidMove(true);
+                            }
                             break;
                         case LIST_OF_PLAYERS:
                             /*List<Player> players2 = serverRequest.players;

@@ -110,7 +110,7 @@
       </GridPane>
    </right>
    <center>
-      <Text fill="RED" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="INVALID MOVE" textAlignment="CENTER" wrappingWidth="610.285705566406" BorderPane.alignment="BOTTOM_CENTER">
+      <Text fx:id="invalidMove" visible="false" fill="RED" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="INVALID MOVE" textAlignment="CENTER" wrappingWidth="610.285705566406" BorderPane.alignment="BOTTOM_CENTER">
          <font>
             <Font size="49.0" />
          </font>
