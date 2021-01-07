@@ -134,8 +134,6 @@ public class PlayerViewController {
             }
         }
 
-        // TODO deactivate cards
-
         renderPlayerCards();
     }
 
@@ -144,7 +142,10 @@ public class PlayerViewController {
             topCard.setImage(new Image("PNGs/large/card_back.png"));
             return;
         }
-        String url = "PNGs/large/" + card.color + "_" + card.type +".png";
+        Card.Color color = card.color;
+        if (SocketThread.currentWildColor != null && (card.type == Card.Type.WILD || card.type == Card.Type.WILD_DRAW_FOUR))
+            color = SocketThread.currentWildColor;
+        String url = "PNGs/large/" + color + "_" + card.type +".png";
         topCard.setImage(new Image(url));
     }
 
@@ -179,7 +180,8 @@ public class PlayerViewController {
 
         for (ImageView image : cardsList) {
             if (playerCards != null && i<playerCards.size() && i<13) {
-                image.setImage(new Image("PNGs/large/" + playerCards.get(i).color + "_" + playerCards.get(i).type + ".png"));
+                Card currentCard = playerCards.get(i);
+                image.setImage(new Image("PNGs/large/" + currentCard.color + "_" + currentCard.type + ".png"));
             }else
                 image.setImage(new Image("PNGs/large/card_back.png"));
             i++;

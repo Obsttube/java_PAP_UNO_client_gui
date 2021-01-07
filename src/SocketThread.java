@@ -9,6 +9,7 @@ public class SocketThread extends Thread {
     static List<Card> playerCards = null;
     static Card tableCard = null; 
     static boolean gameStarted = false;
+    static Card.Color currentWildColor = null;
 
     public void run(){
         gameStarted = false;
@@ -54,6 +55,7 @@ public class SocketThread extends Thread {
                         case YOUR_CARDS:
                             tableCard = serverRequest.cardOnTable;
                             playerCards = serverRequest.cardsOnHand;
+                            currentWildColor = serverRequest.currentWildColor;
                             pvc = Main.playerViewController;
                             if (pvc !=null){
                                 pvc.renderPlayerCards();
