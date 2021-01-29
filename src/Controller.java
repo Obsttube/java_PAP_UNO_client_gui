@@ -54,13 +54,18 @@ public class Controller {
             return;
         }
 
+        if (Main.test_start) {
+            Main.test_login = login;
+            Main.test_password = password;
+        }
+
         ClientRequest clientRequest;
         ServerRequest serverRequest;
 
         try{
             Main.socket = new Socket("127.0.0.1", 25566);
             Main.socket.setSoTimeout(10*1000);
-            
+
             Thread.sleep(100); // TODO
 
             Main.bufferedInputStream = new BufferedInputStream(Main.socket.getInputStream());
@@ -92,7 +97,7 @@ public class Controller {
                     stage.setTitle("UNO");
                     stage.setMaximized(true);
                     stage.setScene(new Scene(root));
-        
+
                     Scene scene = stage.getScene();
 
                     @SuppressWarnings("unchecked")
@@ -103,7 +108,7 @@ public class Controller {
                         System.out.println(lobby.id + " " + lobby.name);
                         list.getItems().add(lobby.name);
                     }
-        
+
                     stage.show();
                     Main.stg.close();
                     Main.stg = stage;
@@ -160,6 +165,11 @@ public class Controller {
             return;
         }
 
+        if (Main.test_start) {
+            Main.test_login = login;
+            Main.test_password = password;
+        }
+
         // successfulRegister = register(login, password);
 
         if(!successfulRegister) {
@@ -193,8 +203,13 @@ public class Controller {
             textSelectLobby.setVisible(false);
         }
         System.out.println(selectedItem);
+
+        if (Main.test_start) {
+            Main.test_list_id = selectedItem;
+        }
+
         try{
-            
+
             ClientRequest clientRequest = new ClientRequest(ClientRequest.RequestType.JOIN_LOBBY);
             clientRequest.lobbyId = lobbyList.get(selectedItem).id;
             Main.objectOutputStream.writeObject(clientRequest);
@@ -257,7 +272,7 @@ public class Controller {
 
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
-        
+
         refreshItems(scene);
 
     }
@@ -276,6 +291,10 @@ public class Controller {
         else{
             textWrongGameName.setVisible(true);
             return;
+        }
+
+        if (Main.test_start) {
+            Main.test_game_name = name;
         }
 
         ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();

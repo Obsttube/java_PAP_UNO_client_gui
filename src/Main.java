@@ -21,6 +21,10 @@ public class Main extends Application {
     static ObjectInputStream objectInputStream;
     static ObjectOutputStream objectOutputStream;
 
+    static boolean test_start = false;
+    static String test_login, test_password, test_game_name;
+    static int test_list_id;
+
     @Override
     public void start(Stage primaryStage){
         stg = primaryStage;
@@ -40,4 +44,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void main_test() { test_start = true; launch(); }   // for unit testing
 }
