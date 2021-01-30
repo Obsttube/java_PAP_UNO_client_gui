@@ -1,10 +1,10 @@
 import java.io.Serializable;
 import java.util.List;
 
-public class ServerRequest implements Serializable{
-    private static final long serialVersionUID = 3L;
+public class ServerRequest implements Serializable{  // serializable used for sending this object via sockets
+    private static final long serialVersionUID = 3L;  // required for Serializable, incremented with every change of this class
 
-    public final RequestType requestType;
+    public final RequestType requestType;  // type of request sent to the client
 
     public enum RequestType {
         LOGIN_SUCCESSFUL,
@@ -13,7 +13,7 @@ public class ServerRequest implements Serializable{
         LIST_OF_PLAYERS,
         YOUR_CARDS,
         YOUR_TURN,
-        ILLEGAL_MOVE, // repeat with a legal move
+        ILLEGAL_MOVE, // tells the client to repeat last move, which was illegal
         CHOOSE_COLOR
     }
 
@@ -22,7 +22,7 @@ public class ServerRequest implements Serializable{
     public List<Player> players;
     public List<Card> cardsOnHand;
     public Card cardOnTable;
-    public Card.Color currentWildColor;
+    public Card.Color currentWildColor;  // color of current Wild card, if there is one on the table
 
     public ServerRequest(RequestType requestType) {
         this.requestType = requestType;

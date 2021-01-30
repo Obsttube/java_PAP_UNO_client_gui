@@ -12,14 +12,14 @@ import java.net.Socket;
 
 public class Main extends Application {
 
-    static Stage stg;
+    static Stage stg;  // JavaFX stages
 
-    static PlayerViewController playerViewController = null;
+    static PlayerViewController playerViewController = null;  // reference to playerViewController used for making calls from another thread
 
     static Socket socket = null;
-    static BufferedInputStream bufferedInputStream;
-    static ObjectInputStream objectInputStream;
-    static ObjectOutputStream objectOutputStream;
+    static BufferedInputStream bufferedInputStream;  // for sockets
+    static ObjectInputStream objectInputStream;  // for sockets
+    static ObjectOutputStream objectOutputStream;  // for sockets
 
     static boolean test_start = false;
     static String test_login, test_password, test_game_name;
@@ -34,7 +34,7 @@ public class Main extends Application {
             primaryStage.setTitle("UNO");
             primaryStage.setScene(new Scene(root));
             primaryStage.setMaximized(true);
-            primaryStage.show();
+            primaryStage.show();  // show login screen
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -45,5 +45,5 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void main_test() { test_start = true; launch(); }   // for unit testing
+    public void main_test() { test_start = true; launch(); }  // for unit testing
 }

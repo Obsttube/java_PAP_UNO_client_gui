@@ -98,7 +98,7 @@ public class PlayerViewController {
     private Text invalidMove;
 
 
-    public void invalidMove(boolean show){
+    public void invalidMove(boolean show){  // set invailidMove visibility
         invalidMove.setVisible(show);
     }
 
@@ -110,10 +110,10 @@ public class PlayerViewController {
 
         if (SocketThread.gameStarted){
             int selectedCard = -1;
-            if (!id.equals("drawCard"))
+            if (!id.equals("drawCard"))  // if actual card was selected, not the drawCard button
                 selectedCard = Integer.parseInt(id.substring(4));
-            clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
-            clientRequest.choosenCardIndex = selectedCard;
+            clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);  // create a CHOOSE_CARD request
+            clientRequest.choosenCardIndex = selectedCard;  // set selected card
             SocketThread.lastSelectedCard = SocketThread.playerCards.get(selectedCard);
             try{
                 Main.objectOutputStream.writeObject(clientRequest);
@@ -122,7 +122,7 @@ public class PlayerViewController {
             }
         } else{
             SocketThread.gameStarted = true;
-            clientRequest = new ClientRequest(ClientRequest.RequestType.CLICK_START);
+            clientRequest = new ClientRequest(ClientRequest.RequestType.CLICK_START);  // send start request to the server
             try{
                 Main.objectOutputStream.writeObject(clientRequest);
             } catch(IOException e){
@@ -134,19 +134,19 @@ public class PlayerViewController {
         renderPlayerCards();
     }
 
-    public void setTopCard(Card card) {
+    public void setTopCard(Card card) {  // set image of the top card at the table
         if (card == null){
             topCard.setImage(new Image("PNGs/large/card_back.png"));
             return;
         }
         Card.Color color = card.color;
-        if (SocketThread.currentWildColor != null && (card.type == Card.Type.WILD || card.type == Card.Type.WILD_DRAW_FOUR))
+        if (SocketThread.currentWildColor != null && (card.type == Card.Type.WILD || card.type == Card.Type.WILD_DRAW_FOUR))  // if it is a wild card
             color = SocketThread.currentWildColor;
         String url = "PNGs/large/" + color + "_" + card.type +".png";
         topCard.setImage(new Image(url));
     }
 
-    public void setButtonsState(boolean enabled){
+    public void setButtonsState(boolean enabled){  // disable or enable all available cards
         Button[] buttonsList = {play0, play1, play2, play3, play4, play5, play6, play7, play8, play9, play10};
         if (enabled){
             int i = 0;
@@ -167,7 +167,7 @@ public class PlayerViewController {
         }
     }
 
-    public void renderPlayerCards () {
+    public void renderPlayerCards () {  // show player cards on the screen
         ImageView[] cardsList = {card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,};
         int i=0;
         
@@ -187,7 +187,7 @@ public class PlayerViewController {
 
     }
 
-    public void chooseCard(){
+    public void chooseCard(){  // if it is a wild card and user has to choose card color
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chooseCard.fxml"));
             Parent root = (Parent) fxmlLoader.load();
