@@ -5,10 +5,6 @@ public class Lobby implements Serializable {
     private static long next_available_id = 0;
     public String id;
     public String name;
-    /*public Lobby(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }*/
     public Lobby(String name) {
         this.id = "" + next_available_id;
         next_available_id++;

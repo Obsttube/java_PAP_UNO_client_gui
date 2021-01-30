@@ -66,11 +66,11 @@ public class Controller {
             Main.socket = new Socket("127.0.0.1", 25566);
             Main.socket.setSoTimeout(10*1000);
 
-            Thread.sleep(100); // TODO
+            Thread.sleep(100);
 
             Main.bufferedInputStream = new BufferedInputStream(Main.socket.getInputStream());
             OutputStream outputStream = Main.socket.getOutputStream();
-            Main.objectOutputStream = new ObjectOutputStream(outputStream); // TODO should be created before objectInputStream at both sides https://stackoverflow.com/a/60361496
+            Main.objectOutputStream = new ObjectOutputStream(outputStream);
 
             clientRequest = new ClientRequest(ClientRequest.RequestType.LOGIN);
             clientRequest.playerName = login;
@@ -121,20 +121,19 @@ public class Controller {
         } catch (UnknownHostException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (IOException e) {
-            // TODO
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (InterruptedException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (ClassNotFoundException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } finally {
-            /*if (socket != null) {
+            if (Main.socket != null) {
                 try {
-                    socket.close();
+                    Main.socket.close();
                 } catch (IOException e) {
-                    Logger.getLogger(class.getName()).log(Level.SEVERE, e.getMessage(), e);
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
                 }
-            }*/
+            }
         }
 
         if(!successfulLogin) {
@@ -169,8 +168,6 @@ public class Controller {
             Main.test_login = login;
             Main.test_password = password;
         }
-
-        // successfulRegister = register(login, password);
 
         if(!successfulRegister) {
             textErrorRegister.setVisible(true);
@@ -268,7 +265,6 @@ public class Controller {
     private void handleRefresh(ActionEvent event) {
         event.consume();
         System.out.println("Refreshing...");
-        // jeszcze nie zaimplementowane po stronie serwera
 
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
@@ -281,7 +277,6 @@ public class Controller {
     private void handleCreateGame(ActionEvent event) {
         event.consume();
         System.out.println("Creating game...");
-        // jeszcze nie zaimplementowane po stronie serwera
 
         String name;
         if(textFieldGameName.getText() != null && !textFieldGameName.getText().isEmpty()) {
@@ -298,7 +293,6 @@ public class Controller {
         }
 
         ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
-        // lobbyList = getLobbyList();
         for(Lobby lobby : lobbyList){
             if(name.equals(lobby.name)){
                 textWrongGameName.setVisible(true);

@@ -46,13 +46,6 @@ public class SocketThread extends Thread {
                             }
                             break;
                         case LIST_OF_PLAYERS:
-                            /*List<Player> players2 = serverRequest.players;
-                            System.out.print("{ ");
-                            for (Player player : players2) {
-                                System.out.print(player.name + " ");
-                            }
-                            System.out.println("}");
-                            System.out.println("Write START to begin.");*/
                             break;
                         case YOUR_CARDS:
                             tableCard = serverRequest.cardOnTable;

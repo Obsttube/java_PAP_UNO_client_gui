@@ -105,7 +105,6 @@ public class PlayerViewController {
     public void playCard(ActionEvent actionevent) { //returns string representing index of card or -1 if draw has been chosen
         final Node source = (Node) actionevent.getSource();
         String id = source.getId();
-        //TODO player.drawCard if index < player.numberofcards (??)
 
         ClientRequest clientRequest;
 
