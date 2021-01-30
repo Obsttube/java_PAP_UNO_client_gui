@@ -16,8 +16,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import javafx.scene.Node;
@@ -120,13 +119,20 @@ public class Controller {
 
             }
 
+        } catch(ConnectException e){
+            successfulLogin = false;
+            System.out.println("Could not connect to the server. Is it running?");
         } catch (UnknownHostException e) {
+            successfulLogin = false;
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (IOException e) {
+            successfulLogin = false;
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (InterruptedException e) {
+            successfulLogin = false;
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } catch (ClassNotFoundException e) {
+            successfulLogin = false;
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         } finally {
             if (Main.socket != null) {
